@@ -20,6 +20,24 @@ public class Joueur {
     public int getColonne() {
         return posColonne;
     }
+    public Integer[] getMouvement() {
+        Integer[] mouvement = new Integer[2];
 
+        do {
+            mouvement[0] = mouvementAleatoire();
+            mouvement[1] = mouvementAleatoire();
+        } while (mouvement[0] == 0 && mouvement[1] == 0);
 
+        return mouvement;
+    }
+
+    public void deplacer(Integer[] mouvement) {
+        posLigne += mouvement[0];
+        posColonne += mouvement[1];
+    }
+
+    private int mouvementAleatoire() {
+        return (int) (Math.random() * 3) - 1;
+    }
 }
+

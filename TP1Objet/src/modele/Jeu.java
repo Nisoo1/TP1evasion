@@ -65,7 +65,35 @@ public class Jeu
 
         return positions;
     }
+    private void verifierMouvementEnnemi(Integer[] mouvement) throws PositionInvalideException {
+        int nouvelleLigne = joueurEnnemi.getLigne() + mouvement[0];
+        int nouvelleColonne = joueurEnnemi.getColonne() + mouvement[1];
 
+        if (grille[nouvelleLigne][nouvelleColonne] == 1) {
+            throw new PositionInvalideException(
+                    "Impossible de déplacer l'ennemi sur un mur"
+            );
+        }
+    }
+
+    public void deplacerEnnemi() {
+        boolean mouvementValide = false;
+
+        while (!mouvementValide) {
+            try {
+                Integer[] mouvement = joueurEnnemi.getMouvement();
+                verifierMouvementEnnemi(mouvement);
+                joueurEnnemi.deplacer(mouvement);
+
+                System.out.printf("Deplacement :: succes {%2d, %2d}\n",
+                        joueurEnnemi.getLigne(), joueurEnnemi.getColonne());
+
+                mouvementValide = true;
+
+            } catch (PositionInvalideException e) {
+            }
+        }
+    }
 
     /**
      * Retourne un entier choisit aléatoirement entre min et max.
