@@ -16,7 +16,6 @@ public class Application
     vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
 
     modele.deplacerEnnemi();
-    vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
 
     Thread.sleep(1000);
     }
