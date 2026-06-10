@@ -25,16 +25,18 @@ public class Application
         int ligne = caseChoisie[0];
         int colonne = caseChoisie[1];
 
-        modele.ajouterMur(ligne, colonne);
+        if (modele.ajouterMur(ligne, colonne)) {
+            vue.mettre_a_jours(modele.getPositionMurs(),
+                    modele.getPositionEnnemi());
+            Thread.sleep(200);
 
-        vue.mettre_a_jours(modele.getPositionMurs(),
-                modele.getPositionEnnemi());
-        Thread.sleep(200);
+            modele.deplacerEnnemi();
+            vue.mettre_a_jours(modele.getPositionMurs(),
+                    modele.getPositionEnnemi());
+            Thread.sleep(200);
+        }
 
-        modele.deplacerEnnemi();
-        vue.mettre_a_jours(modele.getPositionMurs(),
-                modele.getPositionEnnemi());
-        Thread.sleep(200);
+
     }
 
     }
