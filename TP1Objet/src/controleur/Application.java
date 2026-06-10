@@ -15,15 +15,28 @@ public class Application
         while (true){
     vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
 
-    modele.deplacerEnnemi();
-
-    vue.clicDoitEtreGerer();
-    vue.getIndicieCaseChoisie();
-    modele.ajouterMur();
 
 
 
-    Thread.sleep(200);
+
+    if (vue.clicDoitEtreGerer()) {
+
+        Integer[] caseChoisie = vue.getIndicieCaseChoisie();
+        int ligne = caseChoisie[0];
+        int colonne = caseChoisie[1];
+
+        modele.ajouterMur(ligne, colonne);
+
+        vue.mettre_a_jours(modele.getPositionMurs(),
+                modele.getPositionEnnemi());
+        Thread.sleep(200);
+
+        modele.deplacerEnnemi();
+        vue.mettre_a_jours(modele.getPositionMurs(),
+                modele.getPositionEnnemi());
+        Thread.sleep(200);
+    }
+
     }
 }
 }
