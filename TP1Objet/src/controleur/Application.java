@@ -12,12 +12,18 @@ public class Application
         Jeu modele = new Jeu();
         GUI vue    = new GUI();
 
-       while (true){
+        while (true){
     vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
 
     modele.deplacerEnnemi();
 
-    Thread.sleep(1000);
+    vue.clicDoitEtreGerer();
+    vue.getIndicieCaseChoisie();
+    modele.ajouterMur();
+
+
+
+    Thread.sleep(200);
     }
 }
 }

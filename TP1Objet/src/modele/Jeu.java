@@ -14,11 +14,32 @@ public class Jeu
         grille = new int[13][13];
         joueurEnnemi = new Joueur(6, 6);
         placerMurs();
+
+
+
     }
     public Integer[] getPositionEnnemi() {
         Integer[] posJoueur = {joueurEnnemi.getLigne(), joueurEnnemi.getColonne()};
         return posJoueur;
     }
+
+    public boolean ajouterMur(int ligne, int colonne) {
+
+        if (ligne == joueurEnnemi.getLigne() && colonne ==
+          joueurEnnemi.getColonne()) {
+            return false;
+        }
+
+        if (grille[ligne][colonne] == 1) {
+            return false;
+        }
+
+        grille[ligne][colonne] = 1;
+        return true;
+
+    }
+
+
 
     private void placerMurs() {
         int nbMursAPlacer = nombreAleatoire(grille.length * 2, grille.length * 3 + 1);

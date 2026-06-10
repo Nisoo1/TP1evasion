@@ -202,6 +202,8 @@ public class GUI extends JFrame
         }
 
 
+
+
         /**
          * Cette classe défini le comportement d'un bouton de la gille de jeu lorsque l'on appuie sur cette
          * case.
