@@ -12,6 +12,11 @@ public class Application
         Jeu modele = new Jeu();
         GUI vue    = new GUI();
 
+        vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
+        Thread.sleep(600);
+
+        modele.deplacerEnnemi();
+
         while (true){
     vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
 
@@ -27,14 +32,13 @@ public class Application
 
         modele.ajouterMur(ligne, colonne);
 
-        vue.mettre_a_jours(modele.getPositionMurs(),
-                modele.getPositionEnnemi());
+        vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
         Thread.sleep(200);
 
         modele.deplacerEnnemi();
-        vue.mettre_a_jours(modele.getPositionMurs(),
-                modele.getPositionEnnemi());
+        vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
         Thread.sleep(200);
+
     }
 
     }
