@@ -115,6 +115,50 @@ public class Jeu
             }
         }
     }
+    public boolean deplacementEstPossible() {
+        return !ennemiSurBordure() && !ennemiEstEncercler();
+    }
+
+    private boolean ennemiSurBordure() {
+        int ligne = joueurEnnemi.getLigne();
+        int colonne = joueurEnnemi.getColonne();
+
+        if (ligne == 0 || ligne == grille.length - 1) {
+            return true;
+        }
+
+        if (colonne == 0 || colonne == grille[0].length - 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean ennemiEstEncercler() {
+        int ligneEnnemi = joueurEnnemi.getLigne();
+        int colonneEnnemi = joueurEnnemi.getColonne();
+
+        for (int ligne = ligneEnnemi - 1; ligne <= ligneEnnemi + 1; ligne++) {
+            for (int colonne = colonneEnnemi - 1; colonne <= colonneEnnemi + 1; colonne++) {
+
+                if (!(ligne == ligneEnnemi && colonne == colonneEnnemi)) {
+                    if (grille[ligne][colonne] != 1) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public int getGagnant() {
+        if (ennemiEstEncercler()) {
+            return 1;
+        }
+
+        return 0;
+    }
 
     /**
      * Retourne un entier choisit aléatoirement entre min et max.

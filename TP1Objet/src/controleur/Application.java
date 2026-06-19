@@ -13,16 +13,12 @@ public class Application
         GUI vue    = new GUI();
 
         vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
-        Thread.sleep(600);
+        Thread.sleep(800);
 
         modele.deplacerEnnemi();
 
-        while (true){
+        while (modele.deplacementEstPossible()){
     vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
-
-
-
-
 
     if (vue.clicDoitEtreGerer()) {
 
@@ -30,17 +26,20 @@ public class Application
         int ligne = caseChoisie[0];
         int colonne = caseChoisie[1];
 
-        modele.ajouterMur(ligne, colonne);
+        boolean mur_ajoute = modele.ajouterMur(ligne, colonne);
 
-        vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
-        Thread.sleep(200);
+        if (mur_ajoute) {
+            vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
+            Thread.sleep(200);
 
-        modele.deplacerEnnemi();
-        vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
-        Thread.sleep(200);
-
+            if (modele.deplacementEstPossible()) {
+                modele.deplacerEnnemi();
+                vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
+                Thread.sleep(200);
+            }
+        }
     }
-
     }
+        vue.afficherGagnant(modele.getGagnant());
 }
 }
