@@ -104,7 +104,7 @@ public class Jeu
             try {
                 Integer[] mouvement = joueurEnnemi.getMouvement();
                 verifierMouvementEnnemi(mouvement);
-                joueurEnnemi.deplacer(mouvement);
+                joueurEnnemi.deplacer(grille);
 
                 System.out.printf("Deplacement :: succes {%2d, %2d}\n",
                         joueurEnnemi.getLigne(), joueurEnnemi.getColonne());

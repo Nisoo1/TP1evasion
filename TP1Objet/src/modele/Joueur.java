@@ -39,5 +39,23 @@ public class Joueur {
     private int mouvementAleatoire() {
         return (int) (Math.random() * 3) - 1;
     }
+
+
+
+    public void deplacer(int[][] grille) {
+        AnalyseurGrille analyseur = new AnalyseurGrille(grille);
+        Integer[] positionActuelle = {posLigne, posColonne};
+        Integer[] nouvellePosition = analyseur.meilleurDeplacement(positionActuelle);
+
+        if (nouvellePosition != null) {
+            posLigne = nouvellePosition[0];
+            posColonne = nouvellePosition[1];
+        }
+    }
 }
+
+
+
+
+
 
