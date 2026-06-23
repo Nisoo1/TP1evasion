@@ -12,11 +12,11 @@ public class Application
         Jeu modele = new Jeu();
         GUI vue    = new GUI();
 
-        vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
+      /*  vue.mettre_a_jours(modele.getPositionMurs(),modele.getPositionEnnemi());
         Thread.sleep(800);
 
         modele.deplacerEnnemi();
-
+*/
         while (modele.deplacementEstPossible()){
     vue.mettre_a_jours(modele.getPositionMurs(), modele.getPositionEnnemi());
 
