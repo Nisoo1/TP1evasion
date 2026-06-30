@@ -2,6 +2,7 @@ package modele;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.ArrayList;
 
 public class AnalyseurGrille {
 
@@ -24,8 +25,97 @@ public class AnalyseurGrille {
 public Integer[] meilleurDeplacement(Integer[] positionEnnemi) {
     calculerDistanceVoisin(positionEnnemi);
     System.out.println(this.toString());
-    return null;
+    return meilleurVoisin(positionEnnemi);
 }
+
+    private Integer[] meilleurVoisin(Integer[] positionEnnemi) {
+        Integer[] sortie = meilleurSortie();
+        ArrayList<Integer[]> chemin = trouverChemin(positionEnnemi, sortie);
+
+        if (chemin.size() == 0) {
+            return positionEnnemi;
+        }
+
+        return chemin.get(chemin.size() - 1);
+    }
+
+    private Integer[] meilleurSortie() {
+        int meilleureDistance = Integer.MAX_VALUE;
+        Integer[] meilleureSortie = null;
+
+        for (int colonne = 0; colonne < grilleDistances[0].length; colonne++) {
+            if (grilleDistances[0][colonne] < meilleureDistance) {
+                meilleureDistance = grilleDistances[0][colonne];
+                meilleureSortie = new Integer[]{0, colonne};
+            }
+
+            if (grilleDistances[grilleDistances.length - 1][colonne] < meilleureDistance) {
+                meilleureDistance = grilleDistances[grilleDistances.length - 1][colonne];
+                meilleureSortie = new Integer[]{grilleDistances.length - 1, colonne};
+            }
+        }
+
+        for (int ligne = 0; ligne < grilleDistances.length; ligne++) {
+            if (grilleDistances[ligne][0] < meilleureDistance) {
+                meilleureDistance = grilleDistances[ligne][0];
+                meilleureSortie = new Integer[]{ligne, 0};
+            }
+
+            if (grilleDistances[ligne][grilleDistances[0].length - 1] < meilleureDistance) {
+                meilleureDistance = grilleDistances[ligne][grilleDistances[0].length - 1];
+                meilleureSortie = new Integer[]{ligne, grilleDistances[0].length - 1};
+            }
+        }
+
+        return meilleureSortie;
+    }
+
+    private ArrayList<Integer[]> trouverChemin(Integer[] positionEnnemi, Integer[] sortie) {
+        ArrayList<Integer[]> chemin = new ArrayList<>();
+
+        int ligneCourante = sortie[0];
+        int colonneCourante = sortie[1];
+
+        while (!(ligneCourante == positionEnnemi[0] && colonneCourante == positionEnnemi[1])) {
+
+            chemin.add(new Integer[]{ligneCourante, colonneCourante});
+
+            int meilleureDistance = grilleDistances[ligneCourante][colonneCourante];
+            int meilleureLigne = ligneCourante;
+            int meilleureColonne = colonneCourante;
+
+            for (int dl = -1; dl <= 1; dl++) {
+                for (int dc = -1; dc <= 1; dc++) {
+
+                    if (dl == 0 && dc == 0) {
+                        continue;
+                    }
+
+                    int ligneVoisin = ligneCourante + dl;
+                    int colonneVoisin = colonneCourante + dc;
+
+                    if (ligneVoisin < 0 || ligneVoisin >= grilleDistances.length) {
+                        continue;
+                    }
+
+                    if (colonneVoisin < 0 || colonneVoisin >= grilleDistances[0].length) {
+                        continue;
+                    }
+
+                    if (grilleDistances[ligneVoisin][colonneVoisin] < meilleureDistance) {
+                        meilleureDistance = grilleDistances[ligneVoisin][colonneVoisin];
+                        meilleureLigne = ligneVoisin;
+                        meilleureColonne = colonneVoisin;
+                    }
+                }
+            }
+
+            ligneCourante = meilleureLigne;
+            colonneCourante = meilleureColonne;
+        }
+
+        return chemin;
+    }
 
 
 

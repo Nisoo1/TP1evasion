@@ -98,12 +98,22 @@ public class Jeu
     }
 
     public void deplacerEnnemi() {
-        boolean mouvementValide = false;
+        joueurEnnemi.deplacer(grille);
+
+        System.out.printf("Deplacement :: succes {%2d, %2d}\n",
+                joueurEnnemi.getLigne(), joueurEnnemi.getColonne());
+       /* boolean mouvementValide = false;
 
         while (!mouvementValide) {
+
+            joueurEnnemi.deplacer(grille);
+
+            System.out.printf("Deplacement :: succes {%2d, %2d}\n",
+                    joueurEnnemi.getLigne(), joueurEnnemi.getColonne());
             try {
                 Integer[] mouvement = joueurEnnemi.getMouvement();
                 verifierMouvementEnnemi(mouvement);
+                joueurEnnemi.deplacer(grille);
                 joueurEnnemi.deplacer(grille);
 
                 System.out.printf("Deplacement :: succes {%2d, %2d}\n",
@@ -113,7 +123,7 @@ public class Jeu
 
             } catch (PositionInvalideException e) {
             }
-        }
+        }*/
     }
     public boolean deplacementEstPossible() {
         return !ennemiSurBordure() && !ennemiEstEncercler();
@@ -156,8 +166,7 @@ public class Jeu
         if (ennemiEstEncercler()) {
             return 1;
         }
-
-        return 0;
+return 0;
     }
 
     /**
